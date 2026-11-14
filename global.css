@@ -8,3 +8,33 @@ body {
     margin: auto;
     padding: 1em;
 }
+
+/* Step 5.1: header with title on the left, time filter on the right */
+header {
+    display: flex;
+    gap: 1em;
+    align-items: baseline;
+    align-self: stretch; /* span full width even though body centers its items */
+}
+
+header label {
+    margin-left: auto; /* push the filter to the right edge */
+}
+
+/* Put time and em on their own line so changing text doesn't shift the slider */
+header time,
+header em {
+    display: block;
+    text-align: right; /* line up under the right end of the slider, like the lab */
+}
+
+/* Default range inputs are ~130px wide; widen to match the lab */
+header input[type="range"] {
+    width: 20em;
+    vertical-align: middle;
+}
+
+header em {
+    color: #888;
+    font-style: italic;
+}

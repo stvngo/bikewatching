@@ -23,3 +23,55 @@ body {
     height: 100%;
     pointer-events: none;
 }
+
+/* 6.1 / 6.2: shared color logic for circles AND legend items.
+   Must be on the elements that have --departure-ratio (each circle,
+   each legend <div>), not on the .legend parent. */
+#map svg circle,
+.legend > div {
+    --color-departures: steelblue;
+    --color-arrivals: darkorange;
+    --color: color-mix(
+        in oklch,
+        var(--color-departures) calc(100% * var(--departure-ratio)),
+        var(--color-arrivals)
+    );
+}
+
+/* 4.3 / 4.4 */
+#map svg circle {
+    fill: var(--color);
+    fill-opacity: 0.6;
+    stroke: white;
+    pointer-events: auto;
+}
+
+/* 6.2: Legend, Design 2 (separate swatches & labels) */
+.legend {
+    display: flex;
+    align-items: center;
+    gap: 2em; /* big gap BETWEEN items */
+    margin-block: 1em;
+    font-size: 0.85em;
+}
+
+.legend-label {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    font-size: 0.85em;
+}
+
+.legend > div {
+    display: flex;
+    align-items: center;
+    gap: 0.4em; /* small gap between swatch and its label (proximity) */
+}
+
+.legend > div::before {
+    content: "";
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background: var(--color);
+}
